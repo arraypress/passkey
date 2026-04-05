@@ -1,0 +1,30 @@
+{
+  "name": "@arraypress/passkey",
+  "version": "1.0.0",
+  "description": "WebAuthn passkey authentication. Registration and login verification with ES256 ECDSA. Built on oslo.js.",
+  "type": "module",
+  "main": "src/index.js",
+  "types": "src/index.d.ts",
+  "exports": {
+    ".": {
+      "import": "./src/index.js",
+      "types": "./src/index.d.ts"
+    }
+  },
+  "files": ["src"],
+  "scripts": {
+    "test": "node --test tests/passkey.test.js"
+  },
+  "keywords": ["passkey", "webauthn", "fido2", "authentication", "passwordless", "biometric"],
+  "author": "David Sherlock",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/arraypress/passkey"
+  },
+  "dependencies": {
+    "@oslojs/crypto": "^1.0.1",
+    "@oslojs/encoding": "^1.1.0",
+    "@oslojs/webauthn": "^1.0.0"
+  }
+}
