@@ -16,7 +16,8 @@ export interface RegistrationResponse {
 }
 
 export interface AuthenticationResponse {
-  credentialId: string;
+  id?: string;
+  credentialId?: string;
   clientDataJSON: string;
   authenticatorData: string;
   signature: string;
@@ -31,6 +32,7 @@ export interface VerifiedRegistration {
   credentialId: string;
   publicKey: Uint8Array;
   counter: number;
+  keyType: 'ec2' | 'ed25519';
 }
 
 export interface VerifiedAuthentication {
@@ -48,7 +50,7 @@ export function generateRegistrationOptions(
   excludeCredentials?: string[]
 ): { challenge: string; options: Record<string, unknown> };
 
-/** Verify a registration response from the browser. */
+/** Verify a registration response from the browser. Supports ES256 and Ed25519. */
 export function verifyRegistration(
   config: Pick<PasskeyConfig, 'rpId' | 'origin'>,
   response: RegistrationResponse,
@@ -61,13 +63,21 @@ export function generateAuthenticationOptions(
   allowCredentials?: string[]
 ): { challenge: string; options: Record<string, unknown> };
 
-/** Verify an authentication response from the browser. */
+/** Verify an authentication response (sync, ES256 only). */
 export function verifyAuthentication(
   config: Pick<PasskeyConfig, 'rpId' | 'origin'>,
   response: AuthenticationResponse,
   storedCredential: StoredCredential,
   storedChallenge: string
 ): VerifiedAuthentication;
+
+/** Verify an authentication response (async, supports ES256 + Ed25519). */
+export function verifyAuthenticationAsync(
+  config: Pick<PasskeyConfig, 'rpId' | 'origin'>,
+  response: AuthenticationResponse,
+  storedCredential: StoredCredential,
+  storedChallenge: string
+): Promise<VerifiedAuthentication>;
 
 /** Get passkey config from a URL. */
 export function getConfig(url: string | URL, siteName?: string): PasskeyConfig;

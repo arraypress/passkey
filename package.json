@@ -9,6 +9,10 @@
     ".": {
       "import": "./src/index.js",
       "types": "./src/index.d.ts"
+    },
+    "./browser": {
+      "import": "./src/browser.js",
+      "types": "./src/browser.d.ts"
     }
   },
   "files": ["src"],
