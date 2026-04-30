@@ -1,6 +1,6 @@
 {
   "name": "@arraypress/passkey",
-  "version": "1.0.1",
+  "version": "1.1.0",
   "description": "WebAuthn passkey authentication. Registration and login verification with ES256 ECDSA. Built on oslo.js.",
   "type": "module",
   "main": "src/index.js",
@@ -13,13 +13,17 @@
     "./browser": {
       "import": "./src/browser.js",
       "types": "./src/browser.d.ts"
+    },
+    "./flow": {
+      "import": "./src/flow.js",
+      "types": "./src/flow.d.ts"
     }
   },
   "files": [
     "src"
   ],
   "scripts": {
-    "test": "node --test tests/passkey.test.js"
+    "test": "node --test tests/*.test.js"
   },
   "keywords": [
     "passkey",
